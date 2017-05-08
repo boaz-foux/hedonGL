@@ -2,6 +2,7 @@
 a simple POC for hedonh,
 hedongl invoke the functionality of gl glu & glfw to node.js .
 
+for example:
 ```js
 const hgl =require('hedonGL'),
  	x =1024,
@@ -12,12 +13,6 @@ const hgl =require('hedonGL'),
 	    hgl.glColor3f(1, 0, 0); hgl.glVertex3f(-0.6, -0.75, 0);
 	    hgl.glColor3f(0, 1, 0); hgl.glVertex3f(0.6, -0.75, 0);
 	    hgl.glColor3f(0, 0, 1); hgl.glVertex3f(0, 0.75, 0);
-	  	hgl.glEnd();
-
-		hgl.glBegin(hgl.GL_POLYGON());
-	    hgl.glColor3f(1, 1, 1); hgl.glVertex3f(-0.7, -0.75, 0.1);
-	    hgl.glColor3f(1, 1, 1); hgl.glVertex3f(0.7, -0.75,0.1);
-	    hgl.glColor3f(1, 1, 1); hgl.glVertex3f(0, 0.85, 0.1);
 	  	hgl.glEnd();
 	};
 
