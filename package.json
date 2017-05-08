@@ -11,6 +11,14 @@
     "type": "git",
     "url": "git+https://github.com/boazfoux/hedonGL.git"
   },
+    "keywords": [
+    "glfw",
+    "glu",
+    "gl",
+    "opengl",
+    "engine",
+    "binding"
+  ],
   "author": "Boaz Foux",
   "license": "MIT",
   "gypfile": true,
