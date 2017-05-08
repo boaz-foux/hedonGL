@@ -1,5 +1,6 @@
 # hedonGL
-a simple POC for hedonh
+a simple POC for hedonh,
+hedongl invoke the functionality of gl glu & glfw to node.js .
 
 ```js
 const hgl =require('hedonGL'),
