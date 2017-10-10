@@ -16,7 +16,12 @@ std::vector<std::string> titles;
 GLFWwindow* CreateWindow (int x , int y , std::string str){
 	int i= titles.size(); 
 	titles.push_back(str);
-	return glfwCreateWindow( x ,  y ,  titles[i].data() ,NULL, NULL);
+	return glfwCreateWindow( x ,  y ,  titles[i].data() ,nullptr, nullptr);
+};
+void GetFramebufferSize ( GLFWwindow *win, void (*fn)(int,int)){
+	int w,h;
+	glfwGetFramebufferSize(win,&w,&h);
+	fn(w,h);
 };
 /* small patch */
 
@@ -26,6 +31,7 @@ void Init( v8::Handle<v8::Object> exports) {
 	// small patch
 	glewExperimental=true; 
 	INVOKE(CreateWindow);
+	INVOKE(GetFramebufferSize);
 
 	//gl 
 	INVOKE(GL_AMBIENT);
@@ -139,6 +145,9 @@ void Init( v8::Handle<v8::Object> exports) {
 	// glfw
 	INVOKE(GLFW_CONTEXT_VERSION_MAJOR);
 	INVOKE(GLFW_CONTEXT_VERSION_MINOR);
+	INVOKE(GLFW_CURSOR);
+	INVOKE(GLFW_CURSOR_HIDDEN);
+	INVOKE(GLFW_DECORATED);
 	INVOKE(GLFW_KEY_ESCAPE);
 	INVOKE(GLFW_OPENGL_CORE_PROFILE); 
 	INVOKE(GLFW_OPENGL_FORWARD_COMPAT); 
@@ -147,7 +156,6 @@ void Init( v8::Handle<v8::Object> exports) {
 	INVOKE(GLFW_SAMPLES);
 	INVOKE(GLFW_STICKY_KEYS);
 	INVOKE(glfwCreateCursor);
-	INVOKE(glfwCreateWindow);
 	INVOKE(glfwCreateWindow);
 	INVOKE(glfwDestroyCursor);
 	INVOKE(glfwDestroyWindow);
@@ -158,6 +166,7 @@ void Init( v8::Handle<v8::Object> exports) {
 	INVOKE(glfwPollEvents);
 	INVOKE(glfwSetCursorEnterCallback);
 	INVOKE(glfwSetCursorPosCallback);
+	// INVOKE(glfwSetFramebufferSize);
 	INVOKE(glfwSetFramebufferSizeCallback);
 	INVOKE(glfwSetInputMode);
 	INVOKE(glfwSetKeyCallback);
@@ -169,6 +178,7 @@ void Init( v8::Handle<v8::Object> exports) {
 	INVOKE(glfwSetWindowPosCallback);
 	INVOKE(glfwSetWindowRefreshCallback);
 	INVOKE(glfwSetWindowSizeCallback);
+	INVOKE(glfwSetWindowSize);
 	INVOKE(glfwSwapBuffers);
 	INVOKE(glfwTerminate);
 	INVOKE(glfwWindowHint);

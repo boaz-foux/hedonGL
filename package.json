@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/boazfoux/hedonGL.git"
   },
-    "keywords": [
+  "keywords": [
     "glfw",
     "glu",
     "gl",
@@ -26,7 +26,8 @@
     "url": "https://github.com/boazfoux/hedonGL/issues"
   },
   "dependencies": {
-    "hedonh": "0.5.6"
+    "hedonh": "../HEDONH",
+    "redux": "^3.7.2"
   },
   "homepage": "https://github.com/boazfoux/hedonGL#readme"
 }

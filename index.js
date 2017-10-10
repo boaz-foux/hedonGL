@@ -1,2 +1,3 @@
-const gl = require('./build/Release/hedonGLsource.node');
+const gl = require('./models/hgl');
+
 module.exports = gl;
