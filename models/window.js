@@ -10,11 +10,12 @@ class Window {
 		counter--;
 		hgl.glfwTerminate();
 	}
-	draw(){
+	draw({ 
+		scale = 10 
+		},children = []){
 		const
 			begin = Date.now(), 
-			{ settings , window , children } = privates.get(this),
-			scale = 10,
+			{ settings , window  , first} = privates.get(this),
 			ratio = scale*settings.width/settings.height;
 
 		hgl.glViewport(
@@ -42,10 +43,16 @@ class Window {
 		hgl.glLoadIdentity();
 		
 
-		children.forEach( i =>  i.draw() );
+		children.forEach( fn =>  fn() );
 		const rednderTime = Date.now() - begin;
 		hgl.glfwSwapBuffers(window);
 		hgl.glfwPollEvents();
+		if(first){
+			hgl.GetFramebufferSize(window,(w,h)=>{
+				settings.width  = w;
+				settings.height = h;
+			});
+		}
 		if(hgl.glfwGetKey(window, hgl.GLFW_KEY_ESCAPE() ) != hgl.GLFW_PRESS() &&
 		hgl.glfwWindowShouldClose(window) == 0){
 			setTimeout(this.draw.bind(this),1);
@@ -55,7 +62,7 @@ class Window {
 		}
 
 	}
-	constructor(settings = {} ,children = []) {
+	constructor(settings = {} ) {
 		info = {};
 		settings.width = ( settings.width && settings.width > 0 )  || 1024;
 	 	settings.height = ( settings.height && settings.height > 0 )  || 768;
@@ -69,7 +76,7 @@ class Window {
 		// hgl.glfwSetInputMode(window, hgl.GLFW_CURSOR, hgl.GLFW_CURSOR_HIDDEN());		
 		hgl.glfwSetInputMode(window, hgl.GLFW_STICKY_KEYS(), hgl.GL_TRUE());
 		hgl.glfwMakeContextCurrent(window); 
-		if (hgl.glewInit() != hgl.GLEW_OK()) {
+		if ( !counter && hgl.glewInit() != hgl.GLEW_OK()) {
 			throw "Failed to initialize GLEW\n";
 			}
 		hgl.glEnable(hgl.GL_DEPTH_TEST()); // not working when looking from negative z index
@@ -128,16 +135,8 @@ class Window {
 
 			});
 		const input = new Input(window);
-		privates.set(this,{input , window  settings , children });
+		privates.set(this,{input , window  settings , first:true });
  		counter++;
- 		
-		this.draw();
-
-		//HDMI PATCH! :'(
-		hgl.GetFramebufferSize(window,(w,h)=>{
-			settings.width  = w;
-			settings.height = h;
-		});
 	}
 
 };

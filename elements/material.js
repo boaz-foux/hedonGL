@@ -1,9 +1,7 @@
-const hgl = require('hedonGL');
+const hgl = require('../hgl');
 
-class Material {
-	 constructor( props ,children) {
-	 	this.children = children;
-	 	const labels = [	
+module.exports = ( props  = {}, children = []) => {
+const labels = [	
 	 				'ambient','diffuse','specular'
 	 			],
 	 			vars =
@@ -19,9 +17,5 @@ class Material {
 		 				return rtn;
 		 			},{});
 		 		vars.shininess = Number.isNaN(props.shininess) ? 30.0 : props.shininess;
-	 }
-	 draw(){
-	 	
-	 }
-}; 
-module.exports = Material;
+		 		/*TODO: continue*/
+ };
