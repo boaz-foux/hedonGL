@@ -45,9 +45,18 @@
             ]
         }],
         ['OS=="mac"', {
-          # 'include_dirs': [ '<!@(pkg-config glfw3 glew --cflags-only-I | sed s/-I//g)'],
-          'libraries': [ '<!@(pkg-config --libs glfw3 glew)', '-framework OpenGL'],
-          'library_dirs': ['/usr/local/lib'],
+          'include_dirs': [ 
+            './dependencies/mac/glew/2.0.0/include',
+            './dependencies/mac/glfw3/3.2.1/include'
+          ],
+          'libraries': [ 
+              '-lglfw3',
+              '-lglew', 
+              '-framework OpenGL'
+            ],
+          'library_dirs': [
+            './dependencies/mac/'
+          ]
         }],
       ]
     }
